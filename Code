@@ -1,0 +1,71 @@
+# Create a menu for user to add things, view their carts and pay.
+cart_total = 0
+while True:
+    print("Here is the menu: ")
+    print("(a) add item to the cart")
+    print("(v) view the cart total")
+    print("(p) pay")
+
+    # let user choose the option
+    option = input("Choose the option: ").lower()
+
+    # if the user chooses to add things to their cart
+    if option == "a":
+
+        # ask them how many different items they want to add
+        item_count = int(input("How many different items do you want to add: "))
+
+        for i in range(1,item_count + 1):
+
+           # tell the user the item number of each item they are adding
+            while True:
+                print("You are adding item ", i)
+
+                # ask the user for price of this item
+                item_price = float(input("Enter the price of this item: "))
+                
+                # check and tell the user if the entered price is not vaid
+                if item_price < 0:
+                    print("Invalid price, try again.")
+                else:
+                    break
+            
+            while True:
+                # ask the user for quantity of this item
+                item_quantity = int(input("Enter quanity of this item: "))
+
+                # check and tell user if the entered quantity is not valid
+                if item_quantity < 0:
+                    print("Invalid quantity, try again.")
+                else:
+                    break
+            
+            # calculate the total cost of each item and show the user
+            item_total = item_price * item_quantity
+            cart_total = cart_total + item_total
+            print("Item is added to cart. Item total is: ", item_total)
+
+    # if the user choose to view their cart total
+    elif option == "v":
+        print("Your current cart total is: $", cart_total )
+    
+    # if the user choose to pay
+    elif option == "p":
+        print("Here is your payment information: ")
+
+        # apply a discount of 5% off if they have more than $100 worth of items
+        if cart_total > 100:
+            discount = cart_total * 0.05
+            final_cart_total = cart_total - discount
+
+            # let the user know if they are qualified for a discount and show the discount detail & cart total
+            print("You are qualified for a discount.")
+            print("Your discount is: $", discount)
+            print("Your final total is: $", final_cart_total)
+        else:
+            print("Your are not qualified for a discount.")
+            print("Your cart total is: ", cart_total)
+    
+        # print a thank you message to the user and end program
+        print("Thank you for shopping with us.")
+        break
